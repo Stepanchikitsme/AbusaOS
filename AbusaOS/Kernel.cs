@@ -15,13 +15,15 @@ using Cosmos.System.Audio;
 using System.Threading;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
+using Cosmos.HAL.Audio;
+using Cosmos.HAL.BlockDevice.Registers;
 
 namespace AbusaOS
 {
     public class Kernel : Sys.Kernel
     {
-
-        public static string version = "v0.2.0";
+        public CosmosVFS fs = new CosmosVFS();
+        public static string version = "v0.3.0";
 
         public static Color bgCol = Color.FromArgb(31, 32, 33);
         public static Color mainCol = Color.FromArgb(57, 64, 69);
@@ -50,8 +52,6 @@ namespace AbusaOS
         static byte[] sampleAudioBytes;
 
         public static Bitmap bg, cursor, logo;
-
-        CosmosVFS fs = new CosmosVFS();
 
         void DrawTopbar()
         {
@@ -174,6 +174,7 @@ namespace AbusaOS
                 applications.Add(new Application(() => new UITest(), "Input Field Test", new UITest().logo));
                 applications.Add(new Application(() => new About(), "About Abusa OS...", new About().logo));
                 applications.Add(new Application(() => new Windows.Power(), "Power...", new Windows.Power().logo));
+                applications.Add(new Application(() => new Explorer(), "Explorer", new Explorer().logo));
 
 
                 for (int i = 0; i < applications.Count; i++)
@@ -184,8 +185,16 @@ namespace AbusaOS
                 try
                 {
                     var mixer = new AudioMixer();
-                    var audioStream = MemoryAudioStream.FromWave(sampleAudioBytes);
+                    var audioStream = new MemoryAudioStream(new SampleFormat(AudioBitDepth.Bits16, 2, true), 48000,  sampleAudioBytes);
                     var driver = AC97.Initialize(bufferSize: 4096);
+                    mixer.Streams.Add(audioStream);
+
+                    var audioManager = new AudioManager()
+                    {
+                        Stream = mixer,
+                        Output = driver
+                    };
+                    audioManager.Enable();
                 }
                 catch (Exception ex)
                 {

@@ -10,3 +10,4 @@ C:\Users\штепашка\Desktop\AbusaOS\AbusaOS\obj\Debug\net6.0\AbusaOS.dll
 C:\Users\штепашка\Desktop\AbusaOS\AbusaOS\obj\Debug\net6.0\refint\AbusaOS.dll
 C:\Users\штепашка\Desktop\AbusaOS\AbusaOS\obj\Debug\net6.0\AbusaOS.pdb
 C:\Users\штепашка\Desktop\AbusaOS\AbusaOS\obj\Debug\net6.0\ref\AbusaOS.dll
+C:\Users\штепашка\Desktop\AbusaOS\AbusaOS\obj\Debug\net6.0\AbusaOS.sourcelink.json
