@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Use VMware Player or Workstation to deploy and debug.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d75b5623509ddbfe00aebde0f2283601939264fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad185944760443e58f0864c11a74d5809fc5770e")]
 [assembly: System.Reflection.AssemblyProductAttribute("AbusaOS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AbusaOS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

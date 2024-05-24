@@ -41,6 +41,7 @@
       <None Remove="Resource\info.bmp" />
       <None Remove="Resource\logo.bmp" />
       <None Remove="Resource\logotext.bmp" />
+      <None Remove="Resource\srtartup.wav" />
       <None Remove="Resource\startup.wav" />
     </ItemGroup>
 
@@ -53,9 +54,9 @@
       <EmbeddedResource Include="Resource\file.bmp" />
       <EmbeddedResource Include="Resource\folder.bmp" />
       <EmbeddedResource Include="Resource\info.bmp" />
-      <EmbeddedResource Include="Resource\startup.wav" />
       <EmbeddedResource Include="Resource\logo.bmp" />
       <EmbeddedResource Include="Resource\logotext.bmp" />
+      <EmbeddedResource Include="Resource\startup.wav" />
     </ItemGroup>
 
     <ItemGroup>

@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|c:\\users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\desktop\\abusaos\\abusaos\\windows\\explorerwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|solutionrelative:abusaos\\windows\\explorerwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|c:\\users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\desktop\\abusaos\\abusaos\\utils\\abusacli.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|solutionrelative:abusaos\\utils\\abusacli.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|c:\\users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\desktop\\abusaos\\abusaos\\abusaos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7BC8DEC5-8D9F-4BF1-9F33-CA9040D35A1C}|AbusaOS\\AbusaOS.csproj|solutionrelative:abusaos\\abusaos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AbusaCLI.cs",
-              "DocumentMoniker": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\Utils\\AbusaCLI.cs",
-              "RelativeDocumentMoniker": "AbusaOS\\Utils\\AbusaCLI.cs",
-              "ToolTip": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\Utils\\AbusaCLI.cs",
-              "RelativeToolTip": "AbusaOS\\Utils\\AbusaCLI.cs",
-              "ViewState": "AQIAAHcAAAAAAAAAAAAlwIMAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T09:40:17.705Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ExplorerWindow.cs",
-              "DocumentMoniker": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\Windows\\ExplorerWindow.cs",
-              "RelativeDocumentMoniker": "AbusaOS\\Windows\\ExplorerWindow.cs",
-              "ToolTip": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\Windows\\ExplorerWindow.cs",
-              "RelativeToolTip": "AbusaOS\\Windows\\ExplorerWindow.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAQwEcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T05:55:41.218Z",
+              "Title": "AbusaOS",
+              "DocumentMoniker": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
+              "RelativeDocumentMoniker": "AbusaOS\\AbusaOS.csproj",
+              "ToolTip": "C:\\Users\\\u0448\u0442\u0435\u043F\u0430\u0448\u043A\u0430\\Desktop\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
+              "RelativeToolTip": "AbusaOS\\AbusaOS.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-24T10:58:33.676Z",
               "EditorCaption": ""
             }
           ]
