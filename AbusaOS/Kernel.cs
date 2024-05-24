@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using AbusaOS.Controls;
 using AbusaOS.Windows;
+
 using Sys = Cosmos.System;
 using Cosmos.Core.Memory;
-using Cosmos.HAL.Drivers.Audio;
 using Cosmos.System.Audio.IO;
 using Cosmos.System.Audio;
 using System.Threading;
@@ -17,6 +17,7 @@ using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 using Cosmos.HAL.Audio;
 using Cosmos.HAL.BlockDevice.Registers;
+using Cosmos.HAL.Drivers.Audio;
 
 namespace AbusaOS
 {
@@ -113,8 +114,11 @@ namespace AbusaOS
                  $"--- Abusa OS {version}",
                  "",
                  $"The system has encountered an uncaught fatal exception",
-                 "","Message: "
-                 ,e.ToString(),"","Click any key to reboot"
+                 "",
+                 "Message: ",
+                 e.ToString(),
+                 "",
+                 "Click any key to reboot"
             };
 
             int y = 10;
@@ -135,13 +139,7 @@ namespace AbusaOS
 
         public static void HandleUncaughtError(Exception e)
         {
-            /*try{
-                ShowMessage(e.Message, "Abusa", MsgType.Error);
-            }
-            catch
-            {*/
             FatalErrorInternal(e);
-            //}
         }
 
         protected override void BeforeRun()
@@ -185,7 +183,7 @@ namespace AbusaOS
                 try
                 {
                     var mixer = new AudioMixer();
-                    var audioStream = new MemoryAudioStream(new SampleFormat(AudioBitDepth.Bits16, 2, true), 48000,  sampleAudioBytes);
+                    var audioStream = new MemoryAudioStream(new SampleFormat(AudioBitDepth.Bits16, 2, true), 48000, sampleAudioBytes);
                     var driver = AC97.Initialize(bufferSize: 4096);
                     mixer.Streams.Add(audioStream);
 
@@ -234,24 +232,29 @@ namespace AbusaOS
                     mainBar = !mainBar;
                 }
 
-
-
-                int mx = (int)MouseManager.X;
-                int my = (int)MouseManager.Y;
-                int dmx = MouseManager.DeltaX;
-                int dmy = MouseManager.DeltaY;
+                // Draw windows
                 for (int i = 0; i < windows.Count; i++)
                 {
+                    // Draw all windows except the active one
                     if (i != activeIndex)
-                        windows[i].Update(canv, mx, my, MouseManager.MouseState == MouseState.Left, dmx, dmy);
+                    {
+                        windows[i].Update(canv, (int)MouseManager.X, (int)MouseManager.Y, MouseManager.MouseState == MouseState.Left, MouseManager.DeltaX, MouseManager.DeltaY); // Update inactive windows
+                    }
                 }
+                // Draw the active window last
                 if (activeIndex != -1 && windows.Count > 0)
-                    windows[activeIndex].Update(canv, mx, my, MouseManager.MouseState == MouseState.Left, dmx, dmy);
+                    windows[activeIndex].Update(canv, (int)MouseManager.X, (int)MouseManager.Y, MouseManager.MouseState == MouseState.Left, MouseManager.DeltaX, MouseManager.DeltaY);
 
+                // Draw the main bar if it's visible
                 if (mainBar) DrawMainBar();
 
+                // Draw the cursor
                 DrawCursor(MouseManager.X, MouseManager.Y);
+
+                // Update the screen
                 canv.Display();
+
+                // Collect garbage
                 Heap.Collect();
             }
             catch (Exception e)
