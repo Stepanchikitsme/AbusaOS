@@ -1,10 +1,9 @@
-﻿using Cosmos.System.Graphics;
+﻿using AbusaOS.Controls;
+using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using IL2CPU.API.Attribs;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Xml.Linq;
-using AbusaOS.Controls;
 
 namespace AbusaOS.Windows
 {
@@ -64,7 +63,7 @@ namespace AbusaOS.Windows
 
             int margin = 80;
 
-            foreach (var obj in controls)
+            foreach (Control obj in controls)
             {
                 if (obj.y + margin > maxparam)
                 {

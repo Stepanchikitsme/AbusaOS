@@ -3,15 +3,13 @@ using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using System;
 using System.Drawing;
-using static Cosmos.HAL.BlockDevice.ATA_PIO;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AbusaOS.Controls
 {
     internal class InputField : Control
     {
         public string Value;
-        public int x, y, width,padding;
+        public int x, y, width, padding;
         VBECanvas canv;
         Font font;
         int _pX, _pY;
@@ -21,7 +19,7 @@ namespace AbusaOS.Controls
         bool showCursor;
         int frames;
         int framesToUpdateCursor = 50;
-        public InputField(int x,int y,int width,Font font,int padding)
+        public InputField(int x, int y, int width, Font font, int padding)
         {
             this.x = x;
             this.y = y;
@@ -38,7 +36,7 @@ namespace AbusaOS.Controls
             }
             else
             {
-                return str.Substring(str.Length - x); // Get the last x characters
+                return str[^x..]; // Get the last x characters
             }
         }
 
@@ -51,25 +49,25 @@ namespace AbusaOS.Controls
             int mX = (int)MouseManager.X;
             int mY = (int)MouseManager.Y;
             bool mD = MouseManager.MouseState == MouseState.Left;
-          
-           
+
+
             focused = MouseInBounds(mX, mY, !mD && lmD);
 
-            if(frames>framesToUpdateCursor)
+            if (frames > framesToUpdateCursor)
             {
                 frames = 0;
                 showCursor = !showCursor;
             }
 
-            if(focused)
+            if (focused)
             {
-                if(KeyboardManager.TryReadKey(out KeyEvent key))
+                if (KeyboardManager.TryReadKey(out KeyEvent key))
                 {
-                    if(key.Key == ConsoleKeyEx.Backspace)
+                    if (key.Key == ConsoleKeyEx.Backspace)
                     {
-                       Value = Value.Remove(Value.Length - 1);
+                        Value = Value.Remove(Value.Length - 1);
                     }
-                    else if(key.Key == ConsoleKeyEx.Enter)
+                    else if (key.Key == ConsoleKeyEx.Enter)
                     {
                         focused = false;
                         submittedOnce = true;
@@ -82,19 +80,19 @@ namespace AbusaOS.Controls
                 canv.DrawFilledRectangle(Color.Gray, x + pX, y + pY, width + padding * 2, font.Height + padding * 2);
             }
 
-            canv.DrawRectangle(Color.White,x+pX, y+pY, width + padding * 2, font.Height + padding * 2);
-            canv.DrawString(GetLastXCharacters(Value,(int)MathF.Round(width/font.Width)-(focused?1:0))+(showCursor&&focused?"_":""), font, Color.White,x+pX+padding,y+pY+padding);
+            canv.DrawRectangle(Color.White, x + pX, y + pY, width + padding * 2, font.Height + padding * 2);
+            canv.DrawString(GetLastXCharacters(Value, (int)MathF.Round(width / font.Width) - (focused ? 1 : 0)) + (showCursor && focused ? "_" : ""), font, Color.White, x + pX + padding, y + pY + padding);
             lmD = mD;
-            if(focused)
+            if (focused)
                 frames++;
         }
 
-        public bool MouseInBounds(int mX, int mY,bool condition)
+        public bool MouseInBounds(int mX, int mY, bool condition)
         {
             if (mX >= x + _pX && mX <= x + width + (padding * 2) + _pX &&
-                mY >= y + _pY && mY <= y + (padding * 2) + _pY+font.Height)
+                mY >= y + _pY && mY <= y + (padding * 2) + _pY + font.Height)
             {
-                if(condition)
+                if (condition)
                     return true;
             }
             else

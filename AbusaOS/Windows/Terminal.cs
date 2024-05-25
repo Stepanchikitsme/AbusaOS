@@ -1,9 +1,6 @@
-﻿using Cosmos.System;
+﻿using AbusaOS.Utils;
+using Cosmos.System;
 using Cosmos.System.Graphics;
-using Cosmos.System.Graphics.Fonts;
-using System;
-using System.Threading;
-using AbusaOS.Utils;
 using Color = System.Drawing.Color;
 
 namespace AbusaOS.Windows
@@ -11,7 +8,7 @@ namespace AbusaOS.Windows
     public class Terminal : Window
     {
         public Color curcol = Color.White;
-        int rown = 50,coln = 50;
+        int rown = 50, coln = 50;
         string[] content;
         private Color[][] colors;
         int at = 0;
@@ -46,27 +43,27 @@ namespace AbusaOS.Windows
 
         void print_char(char c)
         {
-           if (content[at].Length >= coln)
-           {
-               print_newline();
-           }
+            if (content[at].Length >= coln)
+            {
+                print_newline();
+            }
 
-           if (c == '\n')
-           {
-               print_newline();
-               return;
-           }
-                
-           content[at] += c;
-           colors[at][content[at].Length - 1] = curcol;
+            if (c == '\n')
+            {
+                print_newline();
+                return;
+            }
+
+            content[at] += c;
+            colors[at][content[at].Length - 1] = curcol;
         }
 
         public void print_str(string str)
         {
 
-            foreach(char c in str)
+            foreach (char c in str)
             {
-                    print_char(c);
+                print_char(c);
             }
 
         }
@@ -78,7 +75,7 @@ namespace AbusaOS.Windows
             content = new string[rown];
             colors = new Color[rown][];
 
-            for (int i =0;i<rown;i++)
+            for (int i = 0; i < rown; i++)
             {
                 colors[i] = new Color[coln];
                 content[i] = "";
@@ -129,38 +126,38 @@ namespace AbusaOS.Windows
         public override void Update(VBECanvas canv, int mX, int mY, bool mD, int dmX, int dmY)
         {
             base.Update(canv, mX, mY, mD, dmX, dmY);
-            canv.DrawFilledRectangle(Color.Black, x+1, y + window_titlebarsize+1, w-1, h-1);
-            for (int i = 0;i < content.Length;i++)
+            canv.DrawFilledRectangle(Color.Black, x + 1, y + window_titlebarsize + 1, w - 1, h - 1);
+            for (int i = 0; i < content.Length; i++)
             {
                 //canv.DrawString(content[i], font, Color.White, x+1, y + 1 + window_titlebarsize + i*Kernel.defFont.Height);
-                for(int j = 0; j < content[i].Length;j++)
+                for (int j = 0; j < content[i].Length; j++)
                 {
                     canv.DrawChar(content[i][j], font, colors[i][j], x + 1 + (j * Kernel.defFont.Width), y + 1 + window_titlebarsize + i * Kernel.defFont.Height);
                 }
             }
-            
-            
-            if(canwrite && myIndex == Kernel.activeIndex)
+
+
+            if (canwrite && myIndex == Kernel.activeIndex)
             {
-                canv.DrawChar('_', font, curcol, x + 1 + ((content[at].Length+inpstr.Length) * Kernel.defFont.Width), y + 1 + window_titlebarsize + at * Kernel.defFont.Height);
+                canv.DrawChar('_', font, curcol, x + 1 + ((content[at].Length + inpstr.Length) * Kernel.defFont.Width), y + 1 + window_titlebarsize + at * Kernel.defFont.Height);
                 canv.DrawString(inpstr, font, curcol, x + 1 + (content[at].Length) * Kernel.defFont.Width, y + 1 + window_titlebarsize + at * Kernel.defFont.Height);
                 if (KeyboardManager.TryReadKey(out KeyEvent key))
                 {
                     if (key.Key == ConsoleKeyEx.Backspace)
                     {
-                        if(inpstr.Length>0)
+                        if (inpstr.Length > 0)
                             inpstr = inpstr.Remove(inpstr.Length - 1);
                     }
                     else if (key.Key == ConsoleKeyEx.Enter)
                     {
-                        print_str(inpstr+"\n");
+                        print_str(inpstr + "\n");
                         canwrite = false;
                         parse_input(inpstr);
                         inpstr = "";
                     }
                     else
                     {
-                        if(inpstr.Length < coln-4)
+                        if (inpstr.Length < coln - 4)
                             inpstr += key.KeyChar;
                     }
                 }

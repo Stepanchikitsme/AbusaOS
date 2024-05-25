@@ -1,12 +1,10 @@
-﻿using Cosmos.Core;
-using Cosmos.System.FileSystem;
+﻿using AbusaOS.Windows;
+using Cosmos.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using AbusaOS.Windows;
 using Color = System.Drawing.Color;
-using System;
 
 namespace AbusaOS.Utils
 {
@@ -61,7 +59,7 @@ namespace AbusaOS.Utils
             string message = args.Count > 0 ? args[0] : "U ok? Nothing happened";
 
             // Создаём исключение с этим сообщением
-            Exception exception = new Exception(message);
+            Exception exception = new(message);
 
             // Передаём исключение в Kernel.FatalErrorInternal
             Kernel.FatalErrorInternal(exception);

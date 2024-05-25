@@ -1,6 +1,6 @@
-﻿using IL2CPU.API.Attribs;
+﻿using AbusaOS.Controls;
+using IL2CPU.API.Attribs;
 using System;
-using AbusaOS.Controls;
 
 namespace AbusaOS.Windows
 {
@@ -19,7 +19,7 @@ namespace AbusaOS.Windows
         [ManifestResourceStream(ResourceName = "AbusaOS.Resource.info.bmp")]
         static byte[] infoLogoBytes;
 
-       
+
 
         static int GetLineCount(string text)
         {
@@ -38,9 +38,9 @@ namespace AbusaOS.Windows
             }
         }
 
-        public MsgWindow(string title,string err,MsgType type = MsgType.Info) : base(300,300, 200, 100, title, Kernel.defFont, false)
+        public MsgWindow(string title, string err, MsgType type = MsgType.Info) : base(300, 300, 200, 100, title, Kernel.defFont, false)
         {
-            switch(type)
+            switch (type)
             {
                 case MsgType.Info:
                     logo = new Cosmos.System.Graphics.Bitmap(infoLogoBytes);
@@ -49,7 +49,7 @@ namespace AbusaOS.Windows
                     logo = new Cosmos.System.Graphics.Bitmap(errLogoBytes);
                     break;
             }
-            w = Kernel.defFont.Width * GetLongestString(err,title).Length + 20;
+            w = Kernel.defFont.Width * GetLongestString(err, title).Length + 20;
             h = Kernel.defFont.Height * GetLineCount(err) + 20;
             x = (int)Kernel.canv.Mode.Width / 2 - w / 2;
             y = (int)Kernel.canv.Mode.Height / 2 - h / 2;

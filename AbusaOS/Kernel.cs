@@ -1,29 +1,27 @@
-﻿using Cosmos.System;
+﻿using AbusaOS.Controls;
+using AbusaOS.Windows;
+using Cosmos.Core.Memory;
+using Cosmos.HAL.Audio;
+using Cosmos.HAL.Drivers.Audio;
+using Cosmos.System;
+using Cosmos.System.Audio;
+using Cosmos.System.Audio.IO;
+using Cosmos.System.FileSystem;
+using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using IL2CPU.API.Attribs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using AbusaOS.Controls;
-using AbusaOS.Windows;
-
-using Sys = Cosmos.System;
-using Cosmos.Core.Memory;
-using Cosmos.System.Audio.IO;
-using Cosmos.System.Audio;
 using System.Threading;
-using Cosmos.System.FileSystem;
-using Cosmos.System.FileSystem.VFS;
-using Cosmos.HAL.Audio;
-using Cosmos.HAL.BlockDevice.Registers;
-using Cosmos.HAL.Drivers.Audio;
+using Sys = Cosmos.System;
 
 namespace AbusaOS
 {
     public class Kernel : Sys.Kernel
     {
-        public CosmosVFS fs = new CosmosVFS();
+        public CosmosVFS fs = new();
         public static string version = "v0.3.0";
 
         public static Color bgCol = Color.FromArgb(31, 32, 33);
@@ -182,12 +180,12 @@ namespace AbusaOS
 
                 try
                 {
-                    var mixer = new AudioMixer();
-                    var audioStream = new MemoryAudioStream(new SampleFormat(AudioBitDepth.Bits16, 2, true), 48000, sampleAudioBytes);
-                    var driver = AC97.Initialize(bufferSize: 4096);
+                    AudioMixer mixer = new();
+                    MemoryAudioStream audioStream = new(new SampleFormat(AudioBitDepth.Bits16, 2, true), 48000, sampleAudioBytes);
+                    AC97 driver = AC97.Initialize(bufferSize: 4096);
                     mixer.Streams.Add(audioStream);
 
-                    var audioManager = new AudioManager()
+                    AudioManager audioManager = new()
                     {
                         Stream = mixer,
                         Output = driver

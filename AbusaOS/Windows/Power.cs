@@ -1,5 +1,5 @@
-﻿using Cosmos.System.Graphics;
-using AbusaOS.Controls;
+﻿using AbusaOS.Controls;
+using Cosmos.System.Graphics;
 
 namespace AbusaOS.Windows
 {
@@ -11,7 +11,7 @@ namespace AbusaOS.Windows
             x = (int)Kernel.canv.Mode.Width / 2 - 140 / 2;
             y = (int)Kernel.canv.Mode.Height / 2 - 90 / 2;
             shutdownButton = new Button("Shut Down", 20, 20, Kernel.textColDark, Kernel.defFont);
-            restartButton = new Button("Reboot",20,50,Kernel.textColDark,Kernel.defFont);
+            restartButton = new Button("Reboot", 20, 50, Kernel.textColDark, Kernel.defFont);
 
             controls.Add(restartButton);
             controls.Add(shutdownButton);
@@ -21,7 +21,7 @@ namespace AbusaOS.Windows
         {
             base.Update(canv, mX, mY, mD, dmX, dmY);
 
-            if(shutdownButton.clickedOnce)
+            if (shutdownButton.clickedOnce)
             {
                 Cosmos.System.Power.Shutdown();
             }

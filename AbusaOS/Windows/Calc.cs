@@ -1,11 +1,10 @@
 ﻿
+using AbusaOS.Controls;
+using AbusaOS.Utils;
 using Cosmos.System.Graphics;
 using IL2CPU.API.Attribs;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using AbusaOS.Controls;
-using AbusaOS.Utils;
 
 
 namespace AbusaOS.Windows
@@ -15,7 +14,7 @@ namespace AbusaOS.Windows
         public List<List<Button>> buttons = new();
 
         public List<Button> additionalButtons = new();
-        public Button plusButton, minusButton, mulButton,dotButton, divButton, eqButton, cButton, expandButton, sqrtButton,lParenButton,rParenButton;
+        public Button plusButton, minusButton, mulButton, dotButton, divButton, eqButton, cButton, expandButton, sqrtButton, lParenButton, rParenButton;
         public Label result;
 
         public string expression;
@@ -32,7 +31,7 @@ namespace AbusaOS.Windows
             int e = 1;
             for (int i = 0; i < 3; i++)
             {
-                List<Button> cur = new List<Button>();
+                List<Button> cur = new();
                 for (int j = 0; j < 3; j++)
                 {
                     Button nw = new(e.ToString(), 20 + j * 50, 50 + i * 50, Kernel.mainCol, Kernel.defFont, 15);
@@ -42,7 +41,7 @@ namespace AbusaOS.Windows
                 }
                 buttons.Add(cur);
             }
-            Button zeroButton = new Button("0", 70, 200, Kernel.mainCol, Kernel.defFont, 15);
+            Button zeroButton = new("0", 70, 200, Kernel.mainCol, Kernel.defFont, 15);
             controls.Add(zeroButton);
             List<Button> last = new()
             {
@@ -57,12 +56,12 @@ namespace AbusaOS.Windows
             eqButton = new Button("=", 120, 200, Kernel.mainCol, Kernel.defFont, 15);
             cButton = new Button("C", 20, 200, Kernel.mainCol, Kernel.defFont, 15);
             result = new Label("", 20, 20, Kernel.defFont, Kernel.textColDark);
-            sqrtButton = new Button("sqrt", 220, 50, Kernel.mainCol, Kernel.defFont, 15,null,50);
-            lParenButton = new Button("(",220,100,Kernel.mainCol,Kernel.defFont, 15,null,50);
-            rParenButton = new Button(")", 220, 150, Kernel.mainCol, Kernel.defFont, 15,null, 50);
+            sqrtButton = new Button("sqrt", 220, 50, Kernel.mainCol, Kernel.defFont, 15, null, 50);
+            lParenButton = new Button("(", 220, 100, Kernel.mainCol, Kernel.defFont, 15, null, 50);
+            rParenButton = new Button(")", 220, 150, Kernel.mainCol, Kernel.defFont, 15, null, 50);
             dotButton = new Button(".", 220, 200, Kernel.mainCol, Kernel.defFont, 15, null, 50);
 
-            controls.AddRange( new Control[]
+            controls.AddRange(new Control[]
             {
                 sqrtButton,
                 lParenButton,
@@ -78,7 +77,7 @@ namespace AbusaOS.Windows
                 dotButton
             });
 
-            additionalButtons.AddRange(new[] { sqrtButton, lParenButton, rParenButton,dotButton });
+            additionalButtons.AddRange(new[] { sqrtButton, lParenButton, rParenButton, dotButton });
 
 
             foreach (Button b in additionalButtons)
@@ -154,7 +153,7 @@ namespace AbusaOS.Windows
 
                 if (plusButton.clickedOnce)
                 {
-                    if(!expression.EndsWith("+"))
+                    if (!expression.EndsWith("+"))
                     {
                         if (ExpressionParser.IsOperator(expression[^1]))
                         {
@@ -165,7 +164,7 @@ namespace AbusaOS.Windows
                             expression += '+';
                         }
                     }
-                    
+
                 }
 
                 if (minusButton.clickedOnce)

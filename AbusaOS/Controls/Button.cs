@@ -8,10 +8,10 @@ namespace AbusaOS.Controls
     public class Button : Control
     {
         public string Text { get; set; }
-        public Color color,textColor = Kernel.textColDark;
+        public Color color, textColor = Kernel.textColDark;
         public Font font;
         public int padding;
-        public bool clicked, clickedOnce,hovered;
+        public bool clicked, clickedOnce, hovered;
         bool lmD;
         VBECanvas canv;
         int _pX, _pY;
@@ -23,7 +23,7 @@ namespace AbusaOS.Controls
         bool usingFixedWidth;
 
 
-        public Button(string text, int x, int y, Color color, Font font, int padding = 5,Bitmap image = null,int fixedWidth = -1)
+        public Button(string text, int x, int y, Color color, Font font, int padding = 5, Bitmap image = null, int fixedWidth = -1)
         {
             Text = text;
             this.x = x;
@@ -41,7 +41,7 @@ namespace AbusaOS.Controls
             imagewidth = image != null ? (int)image.Width + 5 : 0;
         }
 
-        public Button(string text, int x, int y, Color color,Color textCol, Font font, int padding = 5, Bitmap image = null,int fixedWidth = -1) : this(text, x, y, color, font, padding, image,fixedWidth)
+        public Button(string text, int x, int y, Color color, Color textCol, Font font, int padding = 5, Bitmap image = null, int fixedWidth = -1) : this(text, x, y, color, font, padding, image, fixedWidth)
         {
             textColor = textCol;
         }
@@ -62,23 +62,23 @@ namespace AbusaOS.Controls
             int cw = usingFixedWidth ? fixedWidth : font.Width * Text.Length + padding * 2 + imagewidth;
             if (clicked)
             {
-                
-                canv.DrawFilledRectangle(Color.FromArgb(color.R / 2, color.G / 2, color.B / 2), x + pX, y + pY,cw, height + padding * 2);
+
+                canv.DrawFilledRectangle(Color.FromArgb(color.R / 2, color.G / 2, color.B / 2), x + pX, y + pY, cw, height + padding * 2);
             }
             else if (hovered)
             {
-                canv.DrawFilledRectangle(color, x+pX, y + pY, cw, height + padding * 2);
+                canv.DrawFilledRectangle(color, x + pX, y + pY, cw, height + padding * 2);
             }
             else
             {
-                canv.DrawRectangle(color, x + pX, y + pY, cw, height + padding * 2-1);
+                canv.DrawRectangle(color, x + pX, y + pY, cw, height + padding * 2 - 1);
             }
 
             canv.DrawString(Text, font, textColor, x + padding + pX + imagewidth, y + padding + pY);
 
-            if (image!=null)
+            if (image != null)
             {
-                canv.DrawImageAlpha(image, x + padding/2 + pX, y + padding + pY);
+                canv.DrawImageAlpha(image, x + padding / 2 + pX, y + padding + pY);
             }
 
             lmD = mD;
@@ -89,15 +89,15 @@ namespace AbusaOS.Controls
             if (mX >= x + _pX && mX <= x + (font.Width * Text.Length) + (padding * 2) + _pX + imagewidth &&
                 mY >= y + _pY && mY <= y + height + (padding * 2) + _pY)
             {
-                
-                    return true;
+
+                return true;
             }
 
             return false;
         }
         public bool Clicked(int mX, int mY, bool mD)
         {
-            if (Hovered(mX,mY))
+            if (Hovered(mX, mY))
             {
                 if (mD)
                 {

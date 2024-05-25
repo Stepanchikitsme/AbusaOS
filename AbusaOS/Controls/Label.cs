@@ -10,7 +10,7 @@ namespace AbusaOS.Controls
         VBECanvas canv;
         Font font;
         Color color;
-        public Label(string text,int x,int y,Font font,Color color)
+        public Label(string text, int x, int y, Font font, Color color)
         {
             Text = text;
             this.x = x;
@@ -20,7 +20,7 @@ namespace AbusaOS.Controls
             canv = Kernel.canv;
         }
 
-        public override void Update(int pX,int pY)
+        public override void Update(int pX, int pY)
         {
             if (!Visible) return;
             canv.DrawString(Text, font, color, x + pX, y + pY);

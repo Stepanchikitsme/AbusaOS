@@ -7,8 +7,8 @@ namespace AbusaOS.Utils
     {
         public static double ParseExpression(string expression)
         {
-            Queue<string> outputQueue = new Queue<string>();
-            Stack<char> operatorStack = new Stack<char>();
+            Queue<string> outputQueue = new();
+            Stack<char> operatorStack = new();
 
             string numBuffer = "";
             bool unaryFlag = true;
@@ -101,7 +101,7 @@ namespace AbusaOS.Utils
 
         static double EvaluateRPN(Queue<string> outputQueue)
         {
-            Stack<double> stack = new Stack<double>();
+            Stack<double> stack = new();
 
             while (outputQueue.Count > 0)
             {
@@ -150,22 +150,17 @@ namespace AbusaOS.Utils
 
         public static bool IsOperator(char c)
         {
-            return c == '+' || c == '-' || c == '*' || c == '/';
+            return c is '+' or '-' or '*' or '/';
         }
 
         static int Precedence(char op)
         {
-            switch (op)
+            return op switch
             {
-                case '+':
-                case '-':
-                    return 1;
-                case '*':
-                case '/':
-                    return 2;
-                default:
-                    return 0;
-            }
+                '+' or '-' => 1,
+                '*' or '/' => 2,
+                _ => 0,
+            };
         }
     }
 }

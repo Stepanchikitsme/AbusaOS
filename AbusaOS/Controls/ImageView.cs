@@ -6,7 +6,7 @@ namespace AbusaOS.Controls
     {
         public Bitmap img;
         VBECanvas canv;
-        
+
         public ImageView(Bitmap img, int x, int y)
         {
             this.img = img;
