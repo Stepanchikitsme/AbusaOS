@@ -28,6 +28,8 @@ namespace AbusaOS.Windows
         static byte[] gearBytes;
 
         public Bitmap logo;
+        private int dragOffsetX, dragOffsetY; // Add these variables
+
         public Window(int x, int y, int w, int h, string title, Font font, bool resizable = false)
         {
             this.x = x;
@@ -92,6 +94,8 @@ namespace AbusaOS.Windows
                 if (Kernel.activeIndex != myIndex)
                     Kernel.activeIndex = myIndex;
                 dragging = true;
+                dragOffsetX = mX - x; // Calculate offset when dragging starts
+                dragOffsetY = mY - y; // Calculate offset when dragging starts
             }
             if (ClickedResize(mX, mY, mD && !lmD) && resizable)
             {
@@ -139,10 +143,10 @@ namespace AbusaOS.Windows
 
             canv.DrawImageAlpha(logo, x + 10, y + 5);
 
-            if (dragging)
+            if (dragging && Kernel.activeIndex == myIndex) // Ensure only active window is dragged
             {
-                x += dmX;
-                y += dmY;
+                x = mX - dragOffsetX; // Use offset to set new position
+                y = mY - dragOffsetY; // Use offset to set new position
                 if (y <= 0)
                 {
                     y = 0;
