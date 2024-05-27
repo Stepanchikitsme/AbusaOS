@@ -14,22 +14,25 @@ namespace AbusaOS.Windows
         public string title;
         public Font font;
         public bool dragging;
-        public bool startDrag;
         public bool resizing;
         protected const int window_titlebarsize = 30;
         bool lmD;
         public List<Control> controls = new();
         public bool resizable = false;
+        public bool windowed = true; // New property to control the presence of the maximize button
         public Button closeButton;
+        public Button maximizeButton;
         protected int myIndex = -1;
+        private int dragOffsetX, dragOffsetY;
+        private bool maximized = false;
+        private Rectangle previousBounds;
 
         [ManifestResourceStream(ResourceName = "AbusaOS.Resource.Applogos.gear.bmp")]
         static byte[] gearBytes;
 
         public Bitmap logo;
-        private int dragOffsetX, dragOffsetY; // Add these variables
 
-        public Window(int x, int y, int w, int h, string title, Font font, bool resizable = false)
+        public Window(int x, int y, int w, int h, string title, Font font, bool resizable = false, bool windowed = true)
         {
             this.x = x;
             this.y = y;
@@ -38,7 +41,14 @@ namespace AbusaOS.Windows
             this.title = title;
             this.font = font;
             this.resizable = resizable;
-            closeButton = new Button("X", w - 20, 2, Color.Red, font);
+            this.windowed = windowed;
+            closeButton = new Button("X", w - 40, 2, Color.Red, font);
+
+            if (windowed)
+            {
+                maximizeButton = new Button("[]", w - 80, 2, Color.FromArgb(0, 166, 9), font);
+            }
+
             logo = new Bitmap(gearBytes);
 
             FixBounds();
@@ -53,9 +63,9 @@ namespace AbusaOS.Windows
 
         void FixBounds()
         {
-            if (w <= font.Width * title.Length + 60)
+            if (w <= font.Width * title.Length + 80)
             {
-                w = font.Width * title.Length + 60;
+                w = font.Width * title.Length + 80;
             }
             int maxparam = int.MinValue;
 
@@ -93,19 +103,47 @@ namespace AbusaOS.Windows
                 if (Kernel.activeIndex != myIndex)
                     Kernel.activeIndex = myIndex;
                 dragging = true;
-                dragOffsetX = mX - x; // Calculate offset when dragging starts
-                dragOffsetY = mY - y; // Calculate offset when dragging starts
+                dragOffsetX = mX - x;
+                dragOffsetY = mY - y;
             }
             if (ClickedResize(mX, mY, mD && !lmD) && resizable)
             {
                 resizing = true;
             }
 
-            closeButton.x = w - 20;
+            closeButton.x = w - 40;
+            if (windowed)
+            {
+                maximizeButton.x = w - 80;
+            }
 
             if (closeButton.clickedOnce)
             {
                 Close();
+            }
+
+            if (windowed && maximizeButton.clickedOnce)
+            {
+                if (maximized)
+                {
+                    // Restore previous size and position
+                    x = previousBounds.X;
+                    y = previousBounds.Y;
+                    w = previousBounds.Width;
+                    h = previousBounds.Height;
+                    maximized = false;
+                }
+                else
+                {
+                    // Save current size and position
+                    previousBounds = new Rectangle(x, y, w, h);
+                    // Maximize the window
+                    x = 0;
+                    y = 0;
+                    w = (int)canv.Mode.Width;
+                    h = (int)canv.Mode.Height - window_titlebarsize;
+                    maximized = true;
+                }
             }
 
             if (resizing)
@@ -137,15 +175,14 @@ namespace AbusaOS.Windows
                 canv.DrawString(title, font, Kernel.highlightCol, x + (int)logo.Width + 20, y + 10);
             }
 
-            // Черная обводка по периметру окна
             canv.DrawRectangle(Color.Black, x, y, w, h + window_titlebarsize);
 
             canv.DrawImageAlpha(logo, x + 10, y + 5);
 
-            if (dragging && Kernel.activeIndex == myIndex) // Ensure only active window is dragged
+            if (dragging && Kernel.activeIndex == myIndex)
             {
-                x = mX - dragOffsetX; // Use offset to set new position
-                y = mY - dragOffsetY; // Use offset to set new position
+                x = mX - dragOffsetX;
+                y = mY - dragOffsetY;
                 if (y <= 0)
                 {
                     y = 0;
@@ -169,7 +206,7 @@ namespace AbusaOS.Windows
                 }
             }
 
-            if (resizable)
+            if (resizable && !maximized)
                 canv.DrawFilledRectangle(Kernel.textColLight, x + w - 20, y + h - 20 + window_titlebarsize, 20, 20);
 
             foreach (Control c in controls)
@@ -177,6 +214,10 @@ namespace AbusaOS.Windows
                 c.Update(x, y + window_titlebarsize);
             }
             closeButton.Update(x, y);
+            if (windowed)
+            {
+                maximizeButton.Update(x, y);
+            }
 
             lmD = mD;
         }
