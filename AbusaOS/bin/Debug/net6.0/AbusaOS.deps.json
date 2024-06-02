@@ -12,6 +12,7 @@
           "Cosmos.Debug.Kernel": "0.1.0-localbuild20240517101431",
           "Cosmos.Plugs": "0.1.0-localbuild20240517101431",
           "Cosmos.System2": "0.1.0-localbuild20240517101431",
+          "CosmosTTF": "4.0.1",
           "XSharp": "10.0.0"
         },
         "runtime": {
@@ -102,6 +103,18 @@
           }
         }
       },
+      "CosmosTTF/4.0.1": {
+        "dependencies": {
+          "Cosmos.Debug.Kernel": "0.1.0-localbuild20240517101431",
+          "Cosmos.System2": "0.1.0-localbuild20240517101431"
+        },
+        "runtime": {
+          "lib/net6.0/CosmosTTF.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
       "IL2CPU.API/0.1.0-localbuild20240517101431": {
         "runtime": {
           "lib/netstandard2.0/IL2CPU.API.dll": {
@@ -185,6 +198,13 @@
       "sha512": "sha512-1/s8j2Dj5M46AUAIsVe841zEmTze4kUguJibcw0vHi8gN4+9JPE/86/6+C1vO3gX0K7D3WZCP5MgJ1HmvU6QkA==",
       "path": "cosmos.system2/0.1.0-localbuild20240517101431",
       "hashPath": "cosmos.system2.0.1.0-localbuild20240517101431.nupkg.sha512"
+    },
+    "CosmosTTF/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/KmCM5NYW8MxoyAoTBUE7j2O8RgbHnLIfFWRQfMIi50dY7AuqEr6bFv5fcrRkkcklDsruDMH7erSa9SWdt5yhQ==",
+      "path": "cosmosttf/4.0.1",
+      "hashPath": "cosmosttf.4.0.1.nupkg.sha512"
     },
     "IL2CPU.API/0.1.0-localbuild20240517101431": {
       "type": "package",
