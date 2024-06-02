@@ -657,24 +657,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Home\\.nuget\\packages\\": {},
-    "E:\\VSCode\\Visual Stido Code Shares\\NuGetPackages": {}
+    "C:\\Users\\штепашка\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Home\\PycharmProjects\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
+      "projectUniqueName": "C:\\Users\\штепашка\\Desktop\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
       "projectName": "AbusaOS",
-      "projectPath": "C:\\Users\\Home\\PycharmProjects\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
-      "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Home\\PycharmProjects\\AbusaOS\\AbusaOS\\obj\\",
+      "projectPath": "C:\\Users\\штепашка\\Desktop\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
+      "packagesPath": "C:\\Users\\штепашка\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\штепашка\\Desktop\\AbusaOS\\AbusaOS\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "E:\\VSCode\\Visual Stido Code Shares\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\штепашка\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -682,8 +677,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Users\\Home\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
+        "C:\\Users\\штепашка\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -760,7 +754,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
       }
     }
   }

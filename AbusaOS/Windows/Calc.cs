@@ -1,5 +1,4 @@
-﻿
-using AbusaOS.Controls;
+﻿using AbusaOS.Controls;
 using AbusaOS.Utils;
 using Cosmos.System.Graphics;
 using IL2CPU.API.Attribs;

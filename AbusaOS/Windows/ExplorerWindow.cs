@@ -40,12 +40,6 @@ namespace AbusaOS.Windows
                 folderImg = new Bitmap(folderIcon);
                 fileImg = new Bitmap(fileIcon);
 
-                Label toolbar = new Label("Toolbar", 20, 20, font, Kernel.textColDark);
-                controls.Add(toolbar);
-
-                Label folderLabel = new Label("Folders", 20, 60, font, Kernel.textColDark);
-                controls.Add(folderLabel);
-
                 UpdateFolderContent();
             }
             catch (Exception ex)
@@ -80,12 +74,24 @@ namespace AbusaOS.Windows
             try
             {
                 controls.RemoveAll(control => control is Button);
-                backButton = new Button("Back", 500, 20, Color.Black, font, 12);
-                controls.Add(backButton);
-                int folderYPosition = 100;
+
+                if (path != @"0:\")
+                {
+                    backButton = new Button("..", 20, 100, Color.Black, font, 12);
+                    controls.Add(backButton);
+                }
+
+                int folderYPosition = path != @"0:\" ? 155 : 100; // Добавлено расстояние между .. и папками
                 int fileYPosition = 100;
 
-                Label statusBar = new Label($"Status: Browsing {path}", 20, 450, font, Kernel.textColDark);
+                // Очищаем предыдущий статус и создаем новый с правильным отображением пути
+                controls.RemoveAll(control => control is Label && ((Label)control).Text.StartsWith("Status:"));
+                string displayedPath = $"Status: Browsing {path}";
+                if (displayedPath.Length > 100) // Ограничиваем длину строки
+                {
+                    displayedPath = displayedPath.Substring(0, 97) + "...";
+                }
+                Label statusBar = new Label(displayedPath, 20, 450, font, Kernel.textColDark);
                 controls.Add(statusBar);
 
                 for (int i = folderScrollOffset; i < Math.Min(cachedDirs.Length, folderScrollOffset + maxItemsToShow); i++)
@@ -95,14 +101,14 @@ namespace AbusaOS.Windows
                         Tag = cachedDirs[i]
                     };
                     controls.Add(dirItem);
-                    folderYPosition += 35;
+                    folderYPosition += 45; // Добавлено расстояние между элементами
                 }
 
                 for (int i = fileScrollOffset; i < Math.Min(cachedFiles.Length, fileScrollOffset + maxItemsToShow); i++)
                 {
                     Button fileItem = new Button(Path.GetFileName(cachedFiles[i]), 200, fileYPosition, Color.Black, font, 12, fileImg);
                     controls.Add(fileItem);
-                    fileYPosition += 35;
+                    fileYPosition += 45; // Добавлено расстояние между элементами
                 }
 
                 if (cachedDirs.Length > maxItemsToShow)
@@ -156,7 +162,7 @@ namespace AbusaOS.Windows
                     fileScrollOffset = Math.Min(cachedFiles.Length - maxItemsToShow, fileScrollOffset + 1);
                     updated = true;
                 }
-                if (backButton.clickedOnce)
+                if (backButton != null && backButton.clickedOnce)
                 {
                     // Переходим к предыдущему каталогу
                     if (path != @"0:\")
@@ -170,7 +176,7 @@ namespace AbusaOS.Windows
                 {
                     if (control is Button button && button.clickedOnce && button.Tag is string newPath)
                     {
-                        path = Path.Combine(path, newPath); // Update path
+                        path = Path.Combine(path, newPath); // Обновляем путь
                         UpdateFolderContent();
                         return;
                     }
