@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KLc1dvyfia4=",
+  "dgSpecHash": "SskQaPMEmvg=",
   "success": true,
   "projectFilePath": "C:\\Users\\Home\\PycharmProjects\\AbusaOS\\AbusaOS\\AbusaOS.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Home\\.nuget\\packages\\cosmos.hal2\\0.1.0-localbuild20240517101431\\cosmos.hal2.0.1.0-localbuild20240517101431.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\cosmos.plugs\\0.1.0-localbuild20240517101431\\cosmos.plugs.0.1.0-localbuild20240517101431.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\cosmos.system2\\0.1.0-localbuild20240517101431\\cosmos.system2.0.1.0-localbuild20240517101431.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\cosmosttf\\4.0.1\\cosmosttf.4.0.1.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\il2cpu.api\\0.1.0-localbuild20240517101431\\il2cpu.api.0.1.0-localbuild20240517101431.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\spruce\\10.0.0\\spruce.10.0.0.nupkg.sha512",
     "C:\\Users\\Home\\.nuget\\packages\\xsharp\\10.0.0\\xsharp.10.0.0.nupkg.sha512"

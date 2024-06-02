@@ -79,6 +79,10 @@
                 "NU1604"
               ]
             },
+            "CosmosTTF": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
             "XSharp": {
               "target": "Package",
               "version": "[10.0.0, )"

@@ -22,7 +22,7 @@ namespace AbusaOS.Windows
 
         private int folderScrollOffset = 0;
         private int fileScrollOffset = 0;
-        private const int maxItemsToShow = 4;
+        private const int maxItemsToShow = 8;
 
         private string[] cachedDirs;
         private string[] cachedFiles;
@@ -31,6 +31,7 @@ namespace AbusaOS.Windows
         private Button folderScrollDown;
         private Button fileScrollUp;
         private Button fileScrollDown;
+        private Button backButton;
 
         public Explorer() : base(100, 100, 600, 500, "Explorer", Kernel.defFont)
         {
@@ -79,7 +80,8 @@ namespace AbusaOS.Windows
             try
             {
                 controls.RemoveAll(control => control is Button);
-
+                backButton = new Button("Back", 500, 20, Color.Black, font, 12);
+                controls.Add(backButton);
                 int folderYPosition = 100;
                 int fileYPosition = 100;
 
@@ -93,14 +95,14 @@ namespace AbusaOS.Windows
                         Tag = cachedDirs[i]
                     };
                     controls.Add(dirItem);
-                    folderYPosition += 40;
+                    folderYPosition += 35;
                 }
 
                 for (int i = fileScrollOffset; i < Math.Min(cachedFiles.Length, fileScrollOffset + maxItemsToShow); i++)
                 {
                     Button fileItem = new Button(Path.GetFileName(cachedFiles[i]), 200, fileYPosition, Color.Black, font, 12, fileImg);
                     controls.Add(fileItem);
-                    fileYPosition += 40;
+                    fileYPosition += 35;
                 }
 
                 if (cachedDirs.Length > maxItemsToShow)
@@ -108,16 +110,16 @@ namespace AbusaOS.Windows
                     folderScrollUp = new Button("Up", 150, 100, Color.Black, font, 12);
                     controls.Add(folderScrollUp);
 
-                    folderScrollDown = new Button("Down", 150, 200, Color.Black, font, 12);
+                    folderScrollDown = new Button("Down", 150, 400, Color.Black, font, 12);
                     controls.Add(folderScrollDown);
                 }
 
                 if (cachedFiles.Length > maxItemsToShow)
                 {
-                    fileScrollUp = new Button("Up", 550, 100, Color.Black, font, 12);
+                    fileScrollUp = new Button("Up", 500, 100, Color.Black, font, 12);
                     controls.Add(fileScrollUp);
 
-                    fileScrollDown = new Button("Down", 550, 200, Color.Black, font, 12);
+                    fileScrollDown = new Button("Down", 500, 400, Color.Black, font, 12);
                     controls.Add(fileScrollDown);
                 }
             }
@@ -126,7 +128,6 @@ namespace AbusaOS.Windows
                 Kernel.ShowMessage($"Error updating displayed items: {ex.Message}", "Explorer", MsgType.Error);
             }
         }
-
         public override void Update(VBECanvas canv, int mX, int mY, bool mD, int dmX, int dmY)
         {
             try
@@ -154,6 +155,15 @@ namespace AbusaOS.Windows
                 {
                     fileScrollOffset = Math.Min(cachedFiles.Length - maxItemsToShow, fileScrollOffset + 1);
                     updated = true;
+                }
+                if (backButton.clickedOnce)
+                {
+                    // Переходим к предыдущему каталогу
+                    if (path != @"0:\")
+                    {
+                        path = Directory.GetParent(path)?.FullName ?? @"0:\";
+                        UpdateFolderContent();
+                    }
                 }
 
                 foreach (var control in controls)
