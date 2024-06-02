@@ -1,6 +1,7 @@
 ﻿using Cosmos.System;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
+using System;
 using System.Drawing;
 
 namespace AbusaOS.Controls
@@ -22,6 +23,9 @@ namespace AbusaOS.Controls
         int fixedWidth = -1;
         bool usingFixedWidth;
 
+        // Добавлены свойства Tag и Click
+        public event EventHandler Click;
+        public object Tag { get; set; }
 
         public Button(string text, int x, int y, Color color, Font font, int padding = 5, Bitmap image = null, int fixedWidth = -1)
         {
@@ -41,7 +45,8 @@ namespace AbusaOS.Controls
             imagewidth = image != null ? (int)image.Width + 5 : 0;
         }
 
-        public Button(string text, int x, int y, Color color, Color textCol, Font font, int padding = 5, Bitmap image = null, int fixedWidth = -1) : this(text, x, y, color, font, padding, image, fixedWidth)
+        public Button(string text, int x, int y, Color color, Color textCol, Font font, int padding = 5, Bitmap image = null, int fixedWidth = -1)
+            : this(text, x, y, color, font, padding, image, fixedWidth)
         {
             textColor = textCol;
         }
@@ -58,11 +63,10 @@ namespace AbusaOS.Controls
             clickedOnce = Clicked(mX, mY, !mD && lmD);
             hovered = Hovered(mX, mY);
 
-
             int cw = usingFixedWidth ? fixedWidth : font.Width * Text.Length + padding * 2 + imagewidth;
+
             if (clicked)
             {
-
                 canv.DrawFilledRectangle(Color.FromArgb(color.R / 2, color.G / 2, color.B / 2), x + pX, y + pY, cw, height + padding * 2);
             }
             else if (hovered)
@@ -81,6 +85,12 @@ namespace AbusaOS.Controls
                 canv.DrawImageAlpha(image, x + padding / 2 + pX, y + padding + pY);
             }
 
+            // Обработка события Click
+            if (clickedOnce)
+            {
+                Click?.Invoke(this, EventArgs.Empty);
+            }
+
             lmD = mD;
         }
 
@@ -89,12 +99,12 @@ namespace AbusaOS.Controls
             if (mX >= x + _pX && mX <= x + (font.Width * Text.Length) + (padding * 2) + _pX + imagewidth &&
                 mY >= y + _pY && mY <= y + height + (padding * 2) + _pY)
             {
-
                 return true;
             }
 
             return false;
         }
+
         public bool Clicked(int mX, int mY, bool mD)
         {
             if (Hovered(mX, mY))
