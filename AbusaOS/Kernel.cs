@@ -221,7 +221,7 @@ namespace AbusaOS
         {
             try
             {
-                canv.Clear();
+                canv.Clear();   
                 canv.DrawImage(bg, 0, 0);
                 DrawTopbar();
 
