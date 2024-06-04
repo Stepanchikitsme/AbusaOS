@@ -1,4 +1,5 @@
 ﻿using AbusaOS.Controls;
+using AbusaOS.Utils;
 using AbusaOS.Windows;
 using Cosmos.Core.Memory;
 using Cosmos.HAL.Audio;
@@ -151,7 +152,9 @@ namespace AbusaOS
                 bool throwTestError = false;
                 if (throwTestError) { throw new Exception("This is a test exception"); }
 
-                defFont = PCScreenFont.Default;
+                FontLoader fontLoader = new FontLoader();
+                byte[] fontData = fontLoader.LoadFont();
+                defFont = PCScreenFont.LoadFont(fontData);
                 MouseManager.ScreenWidth = canv.Mode.Width;
                 MouseManager.ScreenHeight = canv.Mode.Height;
                 MouseManager.X = MouseManager.ScreenWidth / 2;
